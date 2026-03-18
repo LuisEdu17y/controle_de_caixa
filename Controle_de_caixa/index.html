@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Caixa </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Controle de Caixa </h1>
+        
+        <div class="painel-saldo">
+            <h2>Saldo Atual</h2>
+            <h3 id="saldo-valor">R$ 0.00</h3>
+        </div>
+
+        <form id="form-transacao">
+            <input type="text" id="descricao" placeholder="Descrição (ex: Venda de bolo)" required>
+            <input type="number" id="valor" placeholder="Valor (R$)" step="0.01" required>
+            <select id="tipo" required>
+                <option value="entrada">Entrada (+)</option>
+                <option value="saida">Saída (-)</option>
+            </select>
+            <button type="submit">Adicionar Transação</button>
+        </form>
+
+        <div class="lista-transacoes">
+            <h3>Histórico</h3>
+            <ul id="ul-transacoes">
+                </ul>
+        </div>
+    </div>
+
+    <script src="js/logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
