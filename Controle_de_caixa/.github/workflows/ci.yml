@@ -1,0 +1,28 @@
+name: CI Controle de Caixa
+
+# Diz para o robô rodar toda vez que fizermos um push na branch main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  testes-e-lint:
+    runs-on: ubuntu-latest # O robô vai usar um servidor Linux
+
+    steps:
+    - name: 1. Baixar o código do repositório
+      uses: actions/checkout@v3
+
+    - name: 2. Configurar o Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # Versão estável do Node
+
+    - name: 3. Instalar as dependências (Jest e ESLint)
+      run: npm install
+
+    - name: 4. Rodar a Análise Estática (ESLint)
+      run: npm run lint
+
+    - name: 5. Rodar os Testes Automatizados (Jest)
+      run: npm test
