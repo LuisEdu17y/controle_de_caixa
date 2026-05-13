@@ -3,33 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Caixa </title>
+    <title>Controle de Caixa Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Controle de Caixa </h1>
+<body class="bg-dark text-light">
+
+    <div class="container py-5">
         
-        <div class="painel-saldo">
-            <h2>Saldo Atual</h2>
-            <h3 id="saldo-valor">R$ 0.00</h3>
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary">Controle de Caixa</h1>
+            <p class="text-muted">Gerencie suas finanças com visão em tempo real</p>
+        </header>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center">
+                        <h2 class="card-title h4">Saldo Atual</h2>
+                        <h3 id="saldo-valor" class="display-5 fw-bold text-success">R$ 0.00</h3>
+                        <p class="text-white-50 mb-0">Equivalente a: <span id="saldo-convertido" class="fw-bold text-info">$ 0.00</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h2 class="card-title h4 mb-3">Câmbio Atual</h2>
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <select id="moeda-selecionada" class="form-select form-select-sm w-auto fw-bold text-info border-info" style="background-color: rgba(0,0,0,0.2);">
+                                <option value="USD">Dólar (USD)</option>
+                                <option value="EUR">Euro (EUR)</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                            </select>
+                            <button id="btn-atualizar-cotacao" class="btn btn-outline-info btn-sm">🔄</button>
+                        </div>
+                        <span id="display-cotacao" class="h3 mb-0 text-info">Carregando...</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <form id="form-transacao">
-            <input type="text" id="descricao" placeholder="Descrição (ex: Venda de bolo)" required>
-            <input type="number" id="valor" placeholder="Valor (R$)" step="0.01" required>
-            <select id="tipo" required>
-                <option value="entrada">Entrada (+)</option>
-                <option value="saida">Saída (-)</option>
-            </select>
-            <button type="submit">Adicionar Transação</button>
-        </form>
+        <section class="card bg-secondary text-white shadow mb-4">
+            <div class="card-body">
+                <h3 class="h5 mb-4">Nova Transação</h3>
+                <form id="form-transacao" class="row g-3">
+                    <div class="col-md-5">
+                        <input type="text" id="descricao" class="form-control" placeholder="Descrição (ex: Venda)" required>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" id="valor" class="form-control" step="0.01" placeholder="0.00" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="tipo" class="form-select" required>
+                            <option value="entrada">Entrada (+)</option>
+                            <option value="saida">Saída (-)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-        <div class="lista-transacoes">
-            <h3>Histórico</h3>
-            <ul id="ul-transacoes">
-                </ul>
+        <div class="row g-4">
+            <div class="col-md-5">
+                <section class="card bg-secondary text-white shadow h-100">
+                    <div class="card-body text-center">
+                        <h3 class="h5 mb-4">Resumo Visual</h3>
+                        <canvas id="meuGrafico"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-7">
+                <section class="card bg-secondary text-white shadow h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="h5 mb-0">Histórico</h3>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-light active" onclick="aplicarFiltro('todos')">Todos</button>
+                                <button class="btn btn-sm btn-outline-success" onclick="aplicarFiltro('entrada')">Entradas</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="aplicarFiltro('saida')">Saídas</button>
+                            </div>
+                        </div>
+                        <ul id="ul-transacoes" class="list-group list-group-flush rounded" style="max-height: 300px; overflow-y: auto;">
+                            </ul>
+                    </div>
+                </section>
+            </div>
         </div>
+
     </div>
 
     <script src="js/logic.js"></script>

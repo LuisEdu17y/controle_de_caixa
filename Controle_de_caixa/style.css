@@ -1,80 +1,101 @@
+/* =========================================
+   TEMA PREMIUM: Glassmorphism Dashboard
+   ========================================= */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+    /* Fundo com gradiente moderno (Azul Noturno para Roxo Escuro) */
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    color: #f8fafc;
 }
 
-.container {
-    background-color: white;
-    padding: 20px;
+/* =========================================
+   Cards com Efeito de Vidro (Glassmorphism)
+   ========================================= */
+.card {
+    background: rgba(30, 41, 59, 0.6) !important; /* Fundo semi-transparente */
+    backdrop-filter: blur(12px); /* Desfoque do fundo */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Borda super suave */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra difusa */
+}
+
+/* =========================================
+   Tipografia e Destaques
+   ========================================= */
+header h1 {
+    /* Título com gradiente Neon */
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800 !important;
+}
+
+/* =========================================
+   Inputs e Formulários
+   ========================================= */
+.form-control, .form-select, .input-group-text {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
 }
 
-h1, h2, h3 {
-    text-align: center;
-    color: #333;
+.form-control:focus, .form-select:focus {
+    border-color: #00f2fe !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 242, 254, 0.15) !important;
+}
+
+.form-control::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* =========================================
+   Botões
+   ========================================= */
+.btn-primary {
+    background: linear-gradient(45deg, #4facfe, #00f2fe) !important;
+    border: none !important;
+    color: #0f172a !important; /* Texto escuro para dar contraste no botão claro */
+    font-weight: 700 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+}
+
+/* =========================================
+   Histórico de Transações
+   ========================================= */
+.list-group-item {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-left: 6px solid #444 !important;
     margin-bottom: 10px;
-}
-
-.painel-saldo {
-    background-color: #e0f7fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-#saldo-valor {
-    color: #00796b;
-    font-size: 24px;
-    margin: 0;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-input, select, button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-button {
-    background-color: #00796b;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    border: none;
-}
-
-button:hover {
-    background-color: #004d40;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #f9f9f9;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 4px;
+    border-radius: 10px !important;
     display: flex;
     justify-content: space-between;
-    border-left: 5px solid gray;
+    align-items: center;
+    transition: all 0.2s ease;
 }
 
-li.entrada { border-left-color: #4caf50; }
-li.saida { border-left-color: #f44336; }
+.list-group-item:hover {
+    transform: translateX(5px);
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Cores de Entrada e Saída mais vibrantes */
+.list-group-item.entrada { border-left-color: #10b981 !important; } /* Verde Esmeralda */
+.list-group-item.saida { border-left-color: #ef4444 !important; } /* Vermelho Coral */
+
+/* Scrollbar personalizada e discreta */
+#ul-transacoes::-webkit-scrollbar { width: 6px; }
+#ul-transacoes::-webkit-scrollbar-track { background: transparent; }
+#ul-transacoes::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+#ul-transacoes::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
